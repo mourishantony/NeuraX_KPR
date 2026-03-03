@@ -15,3 +15,12 @@ gdown>=5.2
 tensorboard>=2.20
 scikit-learn>=1.4
 kagglehub>=0.2.5
+# FastAPI and Web Framework
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+# Authentication
+python-jose[cryptography]>=3.3.0
+bcrypt>=4.1.0
+# Database
+pymongo>=4.6.0

@@ -111,7 +111,7 @@ async def upload_face_images(
 def train_person_background(person_name: str):
     """Background task to train a person's face recognition."""
     try:
-        from face_trainer import train_person_from_images
+        from modules.face_trainer import train_person_from_images
         successful, failed, errors = train_person_from_images(person_name)
         print(f"[Training] {person_name}: {successful} successful, {failed} failed")
     except Exception as e:
@@ -135,7 +135,7 @@ async def train_face(
         )
     
     # Run training
-    from face_trainer import train_person_from_images, get_training_status
+    from modules.face_trainer import train_person_from_images, get_training_status
     
     successful, failed, errors = train_person_from_images(
         data.person_name,
@@ -169,7 +169,7 @@ async def retrain_face(
             detail=f"Person '{data.person_name}' not found"
         )
     
-    from face_trainer import retrain_person, get_training_status
+    from modules.face_trainer import retrain_person, get_training_status
     
     successful, failed, errors = retrain_person(
         data.person_name,
@@ -203,7 +203,7 @@ async def get_training_status_endpoint(
             detail=f"Person '{person_name}' not found"
         )
     
-    from face_trainer import get_training_status
+    from modules.face_trainer import get_training_status
     
     return get_training_status(person_name)
 
@@ -224,7 +224,7 @@ async def delete_face_images(
             detail=f"Person '{person_name}' not found"
         )
     
-    from face_trainer import delete_person_training_data
+    from modules.face_trainer import delete_person_training_data
     
     result = delete_person_training_data(person_name)
     
@@ -249,7 +249,7 @@ async def get_registered_faces(current_user: dict = Depends(require_permission("
     for name in names:
         person = persons.find_one({"name": name})
         if person:
-            from face_trainer import get_training_status
+            from modules.face_trainer import get_training_status
             status = get_training_status(name)
             
             result.append({
